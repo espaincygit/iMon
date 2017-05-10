@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project name="iMon" default="makejar" basedir=".">
+	<target name="init">
+		<delete dir="dest"></delete>
+		<delete dir="release"></delete>
+		
+		<mkdir dir="dest"></mkdir>
+		<mkdir dir="release"></mkdir>
+	</target>
+   
+	<target name="cpySrc" depends="init">
+		<copy todir="dest">
+			<fileset dir="bin">
+			</fileset>	
+		</copy>
+	</target>
+	<target name="makejar" depends="cpySrc">
+		<jar jarfile="release/iMon.jar" basedir="dest">
+			<manifest>
+				<attribute name="Main-class" value="com.cy.mon.MainMon" />
+			</manifest>
+		</jar>
+
+		<copy todir="release">
+			<fileset dir="./">
+				<include name="moni.sh" />
+			</fileset>
+		</copy>
+
+		<copy todir="/Volumes/RamDisk/foxpic">
+			<fileset dir="release">
+				<include name="iMon.jar" /> 
+			</fileset>
+		</copy>
+		<copy todir="/Volumes/Macintosh BAK/foxpic">
+			<fileset dir="release">
+				<include name="iMon.jar" /> 
+			</fileset>
+		</copy> 
+		<delete dir="dest"></delete>
+	</target>
+</project>
